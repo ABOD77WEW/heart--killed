@@ -1,0 +1,481 @@
+<div class="min-h-screen text-zinc-300 antialiased">
+  
+  @if (magnifiedCard() !== 'quiz') {
+    <!-- Main Content -->
+    <main class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      
+      <!-- Hero Section -->
+      <section class="text-center mb-24">
+        <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold text-amber-300 font-heading tracking-wide" style="text-shadow: 0 0 12px rgba(252, 211, 77, 0.5), 0 0 30px rgba(251, 191, 36, 0.3);">
+          ع<span class="text-amber-400">َ</span>د<span class="text-amber-400">ِ</span>م<span class="text-amber-400">ْ</span>ت<span class="text-amber-400">ُ</span>كَ ي<span class="text-amber-400">َ</span>ا ق<span class="text-amber-400">َ</span>ل<span class="text-amber-400">ْ</span>ب<span class="text-amber-400">ُ</span>
+        </h1>
+        <p class="mt-4 text-xl sm:text-2xl text-zinc-400">
+          للشاعر <span class="font-bold text-amber-300">ب<span class="text-amber-500">َ</span>ش<span class="text-amber-500">َّ</span>ار<span class="text-amber-500">ُ</span> ب<span class="text-amber-500">ْ</span>ن<span class="text-amber-500">ُ</span> ب<span class="text-amber-500">ُ</span>ر<span class="text-amber-500">ْ</span>د<span class="text-amber-500">ٍ</span></span>
+        </p>
+      </section>
+
+      <!-- Navigation Cards -->
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-right">
+    
+        <!-- Introduction Card -->
+        <div (click)="openCardMagnifier('intro')" class="glowing-card card-bg rounded-2xl p-10 hover:scale-105 transition-all duration-300 cursor-pointer text-right">
+          <h2 class="text-4xl font-bold text-amber-500 mb-3 font-heading">تمهيد</h2>
+          <p class="text-zinc-400 leading-relaxed text-xl">نظرة على عالم بشار بن برد وشاعريته الفذة.</p>
+        </div>
+      
+        <!-- Bio Card -->
+        <div (click)="openCardMagnifier('bio')" class="glowing-card card-bg rounded-2xl p-10 hover:scale-105 transition-all duration-300 cursor-pointer text-right">
+          <h2 class="text-4xl font-bold text-amber-500 mb-3 font-heading">التعريف بالشاعر</h2>
+          <p class="text-zinc-400 leading-relaxed text-xl">لمحات من حياة بشار بن برد، ونشأته، وشعره.</p>
+        </div>
+
+        <!-- Poem Card -->
+        <div (click)="openCardMagnifier('poem')" class="glowing-card card-bg rounded-2xl p-10 hover:scale-105 transition-all duration-300 cursor-pointer text-right">
+          <h2 class="text-4xl font-bold text-amber-500 mb-3 font-heading">القصيدة</h2>
+          <p class="text-zinc-400 leading-relaxed text-xl">تصفح أبيات القصيدة وتفاعل معها بالضغط على البيت.</p>
+        </div>
+
+        <!-- Vocabulary Card -->
+        <div (click)="openCardMagnifier('vocab')" class="glowing-card card-bg rounded-2xl p-10 hover:scale-105 transition-all duration-300 cursor-pointer text-right">
+          <h2 class="text-4xl font-bold text-amber-500 mb-3 font-heading">معاني المفردات</h2>
+          <p class="text-zinc-400 leading-relaxed text-xl">شرح لأبرز الكلمات والمصطلحات الصعبة في القصيدة.</p>
+        </div>
+      
+        <!-- Questions Card -->
+        <div (click)="openCardMagnifier('quiz')" 
+            class="glowing-card card-bg rounded-2xl p-10 hover:scale-105 transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
+            [class.quiz-completed-card]="isQuizPermanentlyCompleted()">
+          @if(isQuizPermanentlyCompleted()) {
+            <div class="flex flex-col items-center justify-center text-center h-full animate-fade-in">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-green-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 class="text-5xl font-bold text-green-300 font-heading">تم</h2>
+                <p class="text-green-400 mt-2">أعد الاختبار</p>
+            </div>
+          } @else {
+            <div class="text-right">
+              <h2 class="text-4xl font-bold text-amber-500 mb-3 font-heading">الأسئلة</h2>
+              <p class="text-zinc-400 leading-relaxed text-xl">اختبر فهمك للقصيدة عبر مجموعة من الأسئلة التفاعلية.</p>
+            </div>
+          }
+        </div>
+
+        <!-- Summary Card -->
+        <div (click)="openCardMagnifier('summary')" class="glowing-card card-bg rounded-2xl p-10 hover:scale-105 transition-all duration-300 cursor-pointer text-right">
+          <h2 class="text-4xl font-bold text-amber-500 mb-3 font-heading">الخلاصة</h2>
+          <p class="text-zinc-400 leading-relaxed text-xl">ملخص شامل للشاعر والقصيدة وأبرز جمالياتها اللغوية.</p>
+        </div>
+      
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800 text-zinc-500 mt-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <h3 class="font-heading text-lg text-amber-300 mb-2">إعداد وتصميم</h3>
+        <p class="text-zinc-400 text-base">عبدالله عامر الشبلي و عمار نادر النعيمي</p>
+        <p class="mt-4 text-xs text-zinc-600">&copy; 2025. جميع الحقوق محفوظة.</p>
+      </div>
+    </footer>
+  }
+</div>
+
+<!-- Quiz Fullscreen Container -->
+@if (magnifiedCard() === 'quiz') {
+  <div 
+    class="fixed inset-0 z-40 overflow-y-auto"
+    [class.animate-fade-in]="!isCardMagnifierClosing()"
+    [class.animate-fade-out]="isCardMagnifierClosing()">
+    
+    <!-- Close Button -->
+    <button (click)="closeCardMagnifier()" class="fixed top-6 right-6 text-amber-800 hover:text-amber-900 transition-colors z-[60] bg-black/10 rounded-full p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="w-full min-h-screen" 
+         [class.animate-slide-in-up]="!isCardMagnifierClosing()"
+         [class.animate-slide-out-down]="isCardMagnifierClosing()">
+        <div class="w-full min-h-screen flex flex-col" style="background-color: #f3e9d2; background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/old_paper.png');">
+            @if (!isWheelVisible()) {
+                <section class="text-zinc-800 animate-fade-in flex-grow w-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+                    @if(isQuizComplete()) {
+                        <div class="fixed inset-0 flex items-center justify-center bg-zinc-950/90 backdrop-blur-md z-50 text-center p-4 animate-fade-in">
+                            <div class="card-bg border border-amber-500/50 rounded-2xl p-8 sm:p-12 shadow-2xl shadow-black/50 animate-slide-in-up">
+                            <h2 class="text-4xl md:text-5xl font-bold text-amber-400 font-heading">أحسنت في حل الأسئلة</h2>
+                            </div>
+                        </div>
+                    } @else {
+                        @let question = currentQuestion();
+                        @let prefixes = ['أ', 'ب', 'ج', 'د'];
+                        <div class="max-w-4xl mx-auto text-center w-full">
+                            <!-- Quiz Header -->
+                            <div class="flex justify-between items-center mb-6">
+                                <p class="text-xl text-amber-800 font-semibold">
+                                    السؤال {{ currentQuestionIndex() + 1 }} من {{ questions().length }}
+                                </p>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="mb-8">
+                                <div class="w-full bg-zinc-400 rounded-full h-2.5">
+                                    <div class="bg-amber-700 h-2.5 rounded-full transition-all duration-500" [style.width.%]="(currentQuestionIndex() + 1) / questions().length * 100"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question -->
+                            <div class="border-2 border-amber-800/30 rounded-2xl p-8 sm:p-12 shadow-inner bg-white/20">
+                                <h2 class="font-heading text-4xl md:text-5xl font-bold text-zinc-900 leading-relaxed mb-10">{{ question.questionText }}</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-2xl">
+                                    @for(option of question.options; track option; let i = $index) {
+                                        <button 
+                                            (click)="selectAnswer(option)"
+                                            class="quiz-option-heritage"
+                                            [disabled]="answerStatus() !== 'unanswered'"
+                                            [class.animate-correct-pop-heritage]="answerStatus() === 'correct' && selectedAnswer() === option"
+                                            [class.animate-incorrect-shake-heritage]="answerStatus() === 'incorrect' && selectedAnswer() === option"
+                                        >
+                                            <span class="quiz-option-text">{{ option }}</span>
+                                            <span class="quiz-option-prefix">{{ prefixes[i] }}</span>
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                            <div class="text-center mt-12">
+                                <button (click)="toggleWheel(true)" class="wheel-of-fortune-button">
+                                    <span class="font-heading text-2xl">عجلة الحظ</span>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </section>
+            } @else {
+                 <section class="text-zinc-800 animate-fade-in relative flex-grow flex flex-col w-full p-4 sm:p-6 md:p-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-4xl md:text-5xl font-bold text-amber-900/80 font-heading">عجلة الحظ</h2>
+                        <button (click)="toggleWheel(false)" class="text-amber-800 font-semibold py-2 px-5 rounded-lg border border-amber-800/40 bg-amber-800/10 hover:bg-amber-800/20 transition-all duration-300 flex items-center gap-2">
+                            <span>العودة للأسئلة</span>
+                        </button>
+                    </div>
+                    <div class="flex-grow flex items-center justify-center">
+                        <div class="wheel-container">
+                            <div class="wheel-pointer"></div>
+                            <div class="wheel" [style.transform]="'rotate(' + wheelRotation() + 'deg)'">
+                                <div class="wheel-center">
+                                    <button (click)="spinWheel()" [disabled]="isSpinning() || availableWheelNumbers().length === 0" 
+                                    class="wheel-spin-button"
+                                    [class.spinning]="isSpinning()">
+                                        @if (availableWheelNumbers().length === 0) {
+                                            <span>انتهى</span>
+                                        } @else {
+                                            <span>أدر العجلة</span>
+                                        }
+                                    </button>
+                                </div>
+                                @for (num of initialWheelNumbers; track num; let i = $index) {
+                                    @let angle = i * 360 / 34;
+                                    <div class="wheel-number-marker" 
+                                        [class.used]="!availableWheelNumbers().includes(num)"
+                                        [style.transform]="'rotate(' + angle + 'deg) translate(0, -220px)'">
+                                        <span class="wheel-number-text" [style.transform]="'rotate(-' + angle + 'deg)'">{{ num }}</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (selectedNumberFromWheel(); as num) {
+                        <div class="wheel-popup-overlay animate-fade-in" (click)="closeWheelPopup()">
+                            <div class="wheel-popup-content animate-slide-in-up" (click)="$event.stopPropagation()">
+                                <button (click)="closeWheelPopup()" class="wheel-popup-close">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                </button>
+                                <div class="font-heading text-4xl leading-loose text-zinc-800 mb-2">
+                                    الرقم المختار هو:
+                                </div>
+                                <div class="wheel-popup-number">{{ num }}</div>
+                            </div>
+                        </div>
+                    }
+                </section>
+            }
+        </div>
+    </div>
+  </div>
+}
+
+
+<!-- Card Magnifier Overlay -->
+@if (magnifiedCard() !== null && magnifiedCard() !== 'quiz') {
+  <div 
+    class="fixed inset-0 bg-zinc-900 z-40 overflow-y-auto p-4 sm:p-6 md:p-8"
+    [class.animate-fade-in]="!isCardMagnifierClosing()"
+    [class.animate-fade-out]="isCardMagnifierClosing()">
+    
+    <!-- Close Button -->
+    <button (click)="closeCardMagnifier()" class="fixed top-6 right-6 text-zinc-400 hover:text-white transition-colors z-[60] bg-black/30 rounded-full p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="container mx-auto max-w-5xl py-16" 
+         [class.animate-slide-in-up]="!isCardMagnifierClosing()"
+         [class.animate-slide-out-down]="isCardMagnifierClosing()">
+      @switch (magnifiedCard()) {
+        @case ('intro') {
+          <section class="card-bg border border-zinc-800 rounded-2xl p-8 sm:p-12 shadow-2xl shadow-black/20">
+            <h2 class="text-5xl font-bold text-amber-500 mb-6 font-heading border-b-2 border-amber-500/30 pb-4">تمهيد</h2>
+            <blockquote class="text-4xl text-zinc-300 italic leading-loose border-r-4 border-amber-500 pr-6 mt-8">
+              "بشار بن برد، شاعرية خصبة تذهب بالشعر كل مذهب في التعبير عن خوالج النفس، والتجاوب مع روح العصر. في حس مرهف، وقدرة على الملاءمة بين اللفظ والمعنى، وبين الصورة والموضوع."
+              <footer class="mt-4 text-lg text-zinc-500 not-italic">- طه الحاجري</footer>
+            </blockquote>
+          </section>
+        }
+        @case ('bio') {
+          <section class="card-bg border border-zinc-800 rounded-2xl p-8 sm:p-12 shadow-2xl shadow-black/20">
+            <div class="md:flex md:items-start md:gap-8">
+              <div class="md:w-2/3">
+                <h2 class="text-5xl font-bold text-amber-500 mb-2 font-heading">التعريف بالشاعر</h2>
+                <p class="text-zinc-500 text-lg mb-6">(٩٥-١٧٧ هـ / ٧١٤-٧٨٤ م)</p>
+                <p class="text-3xl text-zinc-300 leading-relaxed">
+                  هو شاعر مجيد طريف، ولد أعمى، ولكنه كان وسيماً، حسن الصوت، جيد الخطاب. وصفه ابن المعتز: "ختم الملوك، وحضر مجالس الخلفاء، ونال عطاياهم". مدح المهدي، وحضر مجلسه، واندمه وأجزل له. قُتل سنة ١٦٧ هـ أو ١٦٨ هـ.
+                </p>
+              </div>
+              <div class="mt-8 md:mt-0 md:w-1/3 flex items-center justify-center">
+                <div class="w-full aspect-square border-2 border-amber-500/20 rounded-lg flex items-center justify-center p-4 bg-zinc-900/50 shadow-inner shadow-black/50">
+                  <span class="font-heading text-7xl font-bold text-center tracking-wider text-engraved">
+                    بشار<br>بن<br>برد
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+        }
+        @case ('summary') {
+          <section class="card-bg border border-zinc-800 rounded-2xl p-8 sm:p-12 shadow-2xl shadow-black/20 space-y-12">
+            <h2 class="text-5xl font-bold text-amber-500 font-heading border-b-2 border-amber-500/30 pb-4">الخلاصة والتحليل</h2>
+            
+            <div>
+                <h3 class="text-4xl font-bold text-amber-400 mb-4 font-heading">الفكرة العامة للنص</h3>
+                <p class="text-3xl text-zinc-300 leading-relaxed border-r-4 border-amber-500/50 pr-4">
+                    تدور القصيدة حول صراع نفسي عنيف يعيشه الشاعر، حيث يوجه عتاباً لاذعاً إلى قلبه الذي استسلم لحب من طرف واحد، مما جلب له الألم والمعاناة. هي قصيدة تمثل حواراً داخلياً بين العقل الذي يرى عبثية هذا الحب، والعاطفة الجياشة التي ترفض الاستسلام.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-4xl font-bold text-amber-400 mb-4 font-heading">الأفكار الجزئية للأبيات</h3>
+                <ul class="list-none space-y-4 text-2xl text-zinc-300">
+                    <li class="border-r-2 border-amber-500/50 pr-3"><strong class="text-amber-300">الأبيات (١ - ٧):</strong> عتاب مباشر للقلب وتوبيخه على استسلامه لمحبوبة قاسية.</li>
+                    <li class="border-r-2 border-amber-500/50 pr-3"><strong class="text-amber-300">الأبيات (٨ - ١٤):</strong> وصف معاناة الشاعر وجزعه، وتأكيد خيبة الأمل من وعود المحبوبة الكاذبة.</li>
+                    <li class="border-r-2 border-amber-500/50 pr-3"><strong class="text-amber-300">الأبيات (١٥ - ١٩):</strong> انتقال إلى الحكمة والنصح بترك من لا يبادل الود، والتحذير من الخداع والغدر.</li>
+                    <li class="border-r-2 border-amber-500/50 pr-3"><strong class="text-amber-300">الأبيات (٢٠ - ٢٣):</strong> دعوة أخيرة للقلب إلى الصبر والسلوان، والختام بحكمة عن طبيعة القلب وميله لمن يحب.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-4xl font-bold text-amber-400 mb-4 font-heading">مفردات رئيسية</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 text-2xl">
+                    <p><span class="font-bold text-amber-300">عَدِمتُكَ:</span> دعاء بالفقد والموت.</p>
+                    <p><span class="font-bold text-amber-300">صَبابَةً:</span> شوق وحرارة حب.</p>
+                    <p><span class="font-bold text-amber-300">مُرَوَّعاً:</span> خائفاً ومفزوعاً.</p>
+                    <p><span class="font-bold text-amber-300">البَينِ:</span> الفراق.</p>
+                    <p><span class="font-bold text-amber-300">التَعَزّي:</span> التصبر والسلوان.</p>
+                    <p><span class="font-bold text-amber-300">خِبّاً:</span> خادعاً وماكراً.</p>
+                    <p><span class="font-bold text-amber-300">جَدبا:</span> قحطاً، وعدم وفاء.</p>
+                    <p><span class="font-bold text-amber-300">نَحبا:</span> نذراً أو عهداً.</p>
+                    <p><span class="font-bold text-amber-300">جَفا:</span> ابتعد وأعرض.</p>
+                    <p><span class="font-bold text-amber-300">شَغبَ:</span> خصومة وإثارة للشر.</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-4xl font-bold text-amber-400 mb-4 font-heading">جماليات بلاغية</h3>
+                <ul class="list-none space-y-6 text-2xl text-zinc-300">
+                    <li><strong class="text-amber-300 block mb-1">التشخيص والنداء:</strong> في "يا قلب" (البيت 1)، حيث يخاطب قلبه كإنسان عاقل ويشكو إليه، مما يجسد الصراع الداخلي.</li>
+                    <li><strong class="text-amber-300 block mb-1">الاستفهام الاستنكاري:</strong> يتكرر في القصيدة مثل "أَتَجعَلُ مَن هَويتَ..." (البيت 1)، والغرض منه ليس طلب الإجابة بل إظهار التعجب والإنكار من فعل القلب.</li>
+                    <li><strong class="text-amber-300 block mb-1">الاستعارة:</strong> مثل تشبيه الهوى بالطفل الذي يكبر ويشب (البيت 9)، وتشبيه نتائج وعود المحبوبة بالأرض القاحلة "أَنزَلنَ جَدبا" (البيت 19).</li>
+                     <li><strong class="text-amber-300 block mb-1">التشبيه:</strong> في "كَأَنَّكَ ضامِنٌ مِنهُنَّ نَحبا" (البيت 4) لتصوير شدة الإخلاص، وفي "كَأَنَّكَ قَد قَتَلتَ لَهُ قَتيلاً" (البيت 22) لبيان مدى قسوة المحبوبة.</li>
+                    <li><strong class="text-amber-300 block mb-1">الطباق:</strong> كالجمع بين "رَهبَةً" و "رَغباً" (البيت 13) لإبراز التناقض النفسي، وبين "جَفا" و "أَرَبَّ" (البيت 15) للمقارنة بين أنواع الود.</li>
+                    <li><strong class="text-amber-300 block mb-1">الجناس:</strong> يظهر في "كَرَبَتكَ كَربا" (البيت 3) وهو جناس اشتقاق لتأكيد المعنى، وفي "فَكُن خِبّاً إِذا لاقَيتَ خِبّا" (البيت 18) وهو جناس تام يعطي جرساً موسيقياً.</li>
+                    <li><strong class="text-amber-300 block mb-1">الكناية:</strong> في "فَخُذ بِيَدَيكَ تُربا" (البيت 14)، وهي كناية عن صفة الخيبة والفشل المطلق.</li>
+                    <li><strong class="text-amber-300 block mb-1">المبالغة:</strong> في "سَوفَ تَموتُ رُعبا" (البيت 12)، لتصوير شدة الخوف وأثره المدمر على النفس.</li>
+                </ul>
+            </div>
+          </section>
+        }
+         @case ('vocab') {
+          <section class="card-bg border border-zinc-800 rounded-2xl p-8 sm:p-12 shadow-2xl shadow-black/20">
+            <h2 class="text-5xl font-bold text-amber-500 mb-8 font-heading border-b-2 border-amber-500/30 pb-4">معاني المفردات</h2>
+            <div class="space-y-8 mt-8">
+              @for(item of vocabulary(); track item.word) {
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-2 items-baseline border-b border-zinc-800 pb-4">
+                    <p class="md:col-span-1 text-4xl font-bold text-amber-400 font-heading">{{ item.word }}</p>
+                    <p class="md:col-span-2 text-3xl text-zinc-300">{{ item.meaning }}</p>
+                </div>
+              }
+            </div>
+          </section>
+        }
+        @case ('poem') {
+          <section class="card-bg border border-zinc-800 rounded-2xl p-8 sm:p-12 shadow-2xl shadow-black/20">
+            <h2 class="text-5xl font-bold text-amber-500 mb-8 font-heading border-b-2 border-amber-500/30 pb-4">القصيدة</h2>
+            <div class="space-y-6 text-zinc-200">
+              @for (verse of poem(); track verse.num; let i = $index) {
+                <div 
+                  class="flex items-start gap-x-4 border-b border-dashed border-zinc-700 p-4 cursor-pointer hover:bg-zinc-800/50 transition-colors duration-300 rounded-lg -mx-4"
+                  (click)="openMagnifier(i)">
+                  <div class="text-amber-500 font-sans font-bold text-xl pt-2 flex-shrink-0">{{ verse.num }}</div>
+                  <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 font-heading text-3xl leading-loose">
+                      <p>
+                        @for(word of verse.part1; track $index) {
+                          @if (word.meaning) {
+                            <span class="glow-red cursor-pointer relative group">{{ word.word }}<span class="absolute bottom-full right-1/2 translate-x-1/2 mb-2 w-max max-w-xs p-3 text-lg bg-zinc-950 border border-zinc-700 text-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none text-right leading-relaxed font-sans font-normal">
+                                {{ word.meaning }}
+                              </span>
+                            </span>
+                          } @else {
+                            <span>{{ word.word }}</span>
+                          }
+                        }
+                      </p>
+                      <p>
+                        @for(word of verse.part2; track $index) {
+                          @if (word.meaning) {
+                            <span class="glow-red cursor-pointer relative group">{{ word.word }}<span class="absolute bottom-full right-1/2 translate-x-1/2 mb-2 w-max max-w-xs p-3 text-lg bg-zinc-950 border border-zinc-700 text-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none text-right leading-relaxed font-sans font-normal">
+                                {{ word.meaning }}
+                              </span>
+                            </span>
+                          } @else {
+                            <span>{{ word.word }}</span>
+                          }
+                        }
+                      </p>
+                  </div>
+                </div>
+              }
+            </div>
+          </section>
+        }
+      }
+    </div>
+  </div>
+}
+
+<!-- Verse Magnifier Overlay -->
+@if (magnifiedVerseIndex() !== null) {
+  @let verse = magnifiedVerse();
+  <div 
+    class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+    [class.animate-fade-in]="!isMagnifierClosing()"
+    [class.animate-fade-out]="isMagnifierClosing()"
+    (wheel)="onMagnifierScroll($event)">
+    
+    <!-- Close Button -->
+    <button (click)="closeMagnifier()" class="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors z-50">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    
+    <!-- Navigation -->
+    @if(!isExplanationVisible()) {
+      <button (click)="previousVerse()" [disabled]="magnifiedVerseIndex() === 0" class="absolute left-4 md:left-8 text-zinc-400 hover:text-white transition-all disabled:opacity-20 disabled:cursor-not-allowed z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+      </button>
+      <button (click)="nextVerse()" [disabled]="magnifiedVerseIndex() === poem().length - 1" class="absolute right-4 md:right-8 text-zinc-400 hover:text-white transition-all disabled:opacity-20 disabled:cursor-not-allowed z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+      </button>
+    }
+
+    <!-- Verse Content -->
+    @if (verse) {
+      <div class="text-center w-full max-w-7xl my-auto"
+           [class.animate-slide-in-up]="!isMagnifierClosing()"
+           [class.animate-slide-out-down]="isMagnifierClosing()">
+        <h4 class="font-heading text-2xl md:text-3xl text-amber-400 mb-6 tracking-wider">
+          {{ getArabicOrdinal(verse.num) }}
+        </h4>
+        <div class="text-3xl md:text-5xl lg:text-6xl text-white font-bold leading-relaxed md:leading-loose lg:leading-loose">
+          <div class="flex flex-col justify-center items-center gap-y-4">
+            <p>
+              @for(word of verse.part1; track $index) {
+                @if (word.meaning) {
+                  <span class="glow-red cursor-pointer relative group">{{ word.word }}<span class="absolute bottom-full right-1/2 translate-x-1/2 mb-2 w-max max-w-xs p-3 text-base bg-zinc-900 border border-zinc-700 text-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none text-right leading-relaxed font-sans font-normal">
+                      {{ word.meaning }}
+                    </span>
+                  </span>
+                } @else {
+                  <span>{{ word.word }}</span>
+                }
+              }
+            </p>
+            <p>
+              @for(word of verse.part2; track $index) {
+                @if (word.meaning) {
+                  <span class="glow-red cursor-pointer relative group">{{ word.word }}<span class="absolute bottom-full right-1/2 translate-x-1/2 mb-2 w-max max-w-xs p-3 text-base bg-zinc-900 border border-zinc-700 text-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none text-right leading-relaxed font-sans font-normal">
+                      {{ word.meaning }}
+                    </span>
+                  </span>
+                } @else {
+                  <span>{{ word.word }}</span>
+                }
+              }
+            </p>
+          </div>
+        </div>
+
+        <!-- Explanation Section -->
+        @if (verse.explanation) {
+            <div class="mt-12 text-center">
+                <button (click)="toggleExplanation()" class="text-amber-300 font-semibold py-2 px-5 rounded-lg border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 transition-all duration-300 flex items-center gap-2 mx-auto">
+                    <span>الشرح والتحليل</span>
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" [class.rotate-180]="isExplanationVisible()" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <!-- Explanation Modal -->
+                @if (isExplanationVisible()) {
+                    <div class="fixed inset-0 bg-zinc-950/70 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-fade-in" (click)="toggleExplanation()">
+                        <div class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-900 p-6 sm:p-8 rounded-2xl border border-zinc-700 animate-slide-in-up text-right" (click)="$event.stopPropagation()">
+                             <!-- Close Button -->
+                            <button (click)="toggleExplanation()" class="absolute top-4 left-4 text-zinc-500 hover:text-white transition-colors z-10 bg-zinc-800 rounded-full p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            <h3 class="text-3xl font-bold text-amber-400 mb-4 font-heading">الشرح</h3>
+                            <p class="text-2xl text-zinc-300 leading-relaxed">{{ verse.explanation.explanation }}</p>
+
+                            <h3 class="text-3xl font-bold text-amber-400 mt-8 mb-4 font-heading">المفردات</h3>
+                            <ul class="list-none space-y-2 text-2xl">
+                                @for(item of verse.explanation.vocabulary; track item.term) {
+                                    <li>
+                                        <span class="font-bold text-amber-300">{{ item.term }}:</span>
+                                        <span class="text-zinc-300"> {{ item.meaning }}</span>
+                                    </li>
+                                }
+                            </ul>
+
+                            <h3 class="text-3xl font-bold text-amber-400 mt-8 mb-4 font-heading">جماليات بلاغية</h3>
+                            <ul class="list-none space-y-4 text-2xl">
+                                @for(item of verse.explanation.rhetoric; track item.type) {
+                                    <li>
+                                        <span class="font-semibold text-amber-300 bg-amber-500/10 px-2 py-1 rounded">{{ item.type }}:</span>
+                                        <span class="text-zinc-200 block mt-2 pr-4 border-r-2 border-amber-500/50">"{{ item.example }}" &mdash; {{ item.explanation }}</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+      </div>
+    }
+  </div>
+}
